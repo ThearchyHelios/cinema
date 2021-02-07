@@ -7,8 +7,9 @@ public class IHMMain extends javax.swing.JFrame {
     private JButton sortButton;
     private JButton addFilmButton;
     private JLabel lesFilmsLabel;
-    private JList list1;
-    private JTextArea nihaomaTextArea;
+    private JList lesfilmsList;
+    private JTextArea filmInfoTextArea;
+    private JLabel nameOfFilmLabel;
 
 
     public static void main(String[] args) {
@@ -18,6 +19,7 @@ public class IHMMain extends javax.swing.JFrame {
         frame.pack();
         frame.setVisible(true);
     }
+
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
