@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -21,19 +23,22 @@ public class IHMMain extends javax.swing.JFrame {
 
     DefaultListModel<lesfilms> listModel = new DefaultListModel<>();
 
-
-    public static void main(String[] args) {
+    static void mainFrame(){
         JFrame frame = new JFrame("IHMMain");
         frame.setContentPane(new IHMMain().main_interface);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
 
-
+    public static void main(String[] args) {
+        mainFrame();
     }
 
 
     public IHMMain() {
+
+
         lesfilmsList.setModel(listModel);
         String filepath = "/Users/yilunjiang/Documents/GitHub/cinema/JIANG_WANG_KANG_CPOProjet/src/film.txt";
         List<String> list_film_in_txt = new ArrayList<String>();
@@ -75,31 +80,56 @@ public class IHMMain extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFrame frameAddFilmToTxt = new JFrame("Add films");
                 frameAddFilmToTxt.setVisible(true);
-                frameAddFilmToTxt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frameAddFilmToTxt.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
                 JPanel jPanel1 = new JPanel();
                 JPanel jPanel2 = new JPanel();
 
 
-                frameAddFilmToTxt.setSize(300, 200);
+                frameAddFilmToTxt.setSize(300, 100);
 
                 JLabel label1AddFilmToTxt = new JLabel("Name: ");
                 JTextField textFieldFilmNameAddFilmToTxt = new JTextField(10);
                 jPanel1.add(label1AddFilmToTxt);
                 jPanel1.add(textFieldFilmNameAddFilmToTxt);
 
+                JLabel label2AddFilmToTxt = new JLabel("Type: ");
                 JComboBox comboBoxFilmModeAddFilmToTxt = new JComboBox();
-                comboBoxFilmModeAddFilmToTxt.addItem("adadad");
-
-
+                JButton buttonConfirmAddfilmToText = new JButton("Confirm");
+                comboBoxFilmModeAddFilmToTxt.addItem("DVD");
+                comboBoxFilmModeAddFilmToTxt.addItem("B-ray");
+                comboBoxFilmModeAddFilmToTxt.addItem("Digital");
+                jPanel2.add(label2AddFilmToTxt);
                 jPanel2.add(comboBoxFilmModeAddFilmToTxt);
+                jPanel2.add(buttonConfirmAddfilmToText);
 
 
                 frameAddFilmToTxt.add(jPanel1, BorderLayout.NORTH);
+
                 frameAddFilmToTxt.add(jPanel2, BorderLayout.CENTER);
+
+
+                buttonConfirmAddfilmToText.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            FileWriter fw = new FileWriter(filepath, true);
+                            fw.write("\n" + textFieldFilmNameAddFilmToTxt.getText() + ", " + comboBoxFilmModeAddFilmToTxt.getSelectedItem().toString());
+                            fw.close();
+                            frameAddFilmToTxt.setVisible(false);
+                            frameInit();
+
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                   }
+                });
 
             }
         });
+
+
+
 
     }
 
