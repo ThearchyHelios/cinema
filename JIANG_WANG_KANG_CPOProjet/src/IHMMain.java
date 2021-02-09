@@ -1,4 +1,9 @@
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IHMMain extends javax.swing.JFrame {
     private JPanel main_interface;
@@ -13,17 +18,6 @@ public class IHMMain extends javax.swing.JFrame {
 
     DefaultListModel<lesfilms> listModel = new DefaultListModel<>();
 
-    public IHMMain() {
-        lesfilmsList.setModel(listModel);
-        listModel.addElement(new lesfilms("nihaoma", "DVD"));
-        listModel.addElement(new lesfilms("Your name", "B-Ray"));
-        listModel.addElement(new lesfilms("nihaoma", "DVD"));
-        listModel.addElement(new lesfilms("Your name", "B-Ray"));
-
-
-
-    }
-
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("IHMMain");
@@ -31,9 +25,50 @@ public class IHMMain extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        SwingUtilities.invokeLater(IHMMain::new);
 
     }
+
+
+    public IHMMain() {
+        lesfilmsList.setModel(listModel);
+
+        String filepath = "/Users/yilunjiang/Documents/GitHub/cinema/JIANG_WANG_KANG_CPOProjet/src/film.txt";
+        List<String> list_film_in_txt = new ArrayList<String>();
+        List<String> list_mode_in_txt = new ArrayList<String>();
+        String line = "";
+        try {
+            FileInputStream fin = new FileInputStream(filepath);
+            InputStreamReader reader = new InputStreamReader(fin);
+            BufferedReader buffReader = new BufferedReader(reader);
+            StringBuffer buffer = new StringBuffer();
+            while ((line = buffReader.readLine()) != null) {
+                System.out.println(line);
+                String[]film_string = line.split(",");
+                list_film_in_txt.add(film_string[0].toString());
+                list_mode_in_txt.add(film_string[1].toString());
+            }
+            System.out.println(list_film_in_txt);
+            System.out.println(list_mode_in_txt);
+            buffReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        for(int j=0;j<list_film_in_txt.size();j++){
+            listModel.addElement(new lesfilms(list_film_in_txt.get(j), list_mode_in_txt.get(j)));
+        }
+        lesfilmsList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                lesfilms film = lesfilmsList.getSelectedValue();
+                filmInfoTextArea.setText("Name: " + film.getNomdefilm() + "\n" + "Type: " + film.getModel());
+            }
+        });
+
+
+    }
+
 
     private class lesfilms {
         String nomdefilm;
