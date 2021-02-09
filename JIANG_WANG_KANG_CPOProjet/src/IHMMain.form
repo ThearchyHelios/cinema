@@ -56,10 +56,7 @@
           </grid>
         </constraints>
         <properties>
-          <model>
-            <item value="1"/>
-            <item value="2"/>
-          </model>
+          <model/>
         </properties>
       </component>
       <component id="3fbf7" class="javax.swing.JTextArea" binding="filmInfoTextArea">
