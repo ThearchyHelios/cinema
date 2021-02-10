@@ -17,26 +17,14 @@ wobuhao,B-ray
 nihaoma,DVD
 wobuhao,B-ray
 nihaoma,DVD
-wobuhao,B-ray
-nihaoma,DVD
-wobuhao,B-ray
-nihaoma,DVD
-wobuhao,B-ray
-nihaoma,DVD
-wobuhao,B-ray
-adad,DVD
-adadad,DVD
-adadd,DVD
-adadd,DVD
-你好吗,DVD
-Digital ,Digital
-a,DVD
-,DVD
-,DVD
-,DVD
-,DVD
-,DVD
-,DVD
-,DVD
-,DVD
-Wilson,Digital
+Citizen Kane,DVD
+Dancer in the Dark,B-ray
+The Dark,DVD
+The Fifth Element,DVD
+Metropolis,DVD
+My Life Without Me,DVD
+The Endless Summer,DVD
+Pirates of the Caribbean: The Curse of the Black Pearl,DVD
+Kill Bill: Vol. 1,DVD
+Jarhead,DVD
+LaLehet Al HaMayim,DVD
