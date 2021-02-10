@@ -23,6 +23,7 @@ public class IHMMain extends javax.swing.JFrame {
 
     DefaultListModel<lesfilms> listModel = new DefaultListModel<>();
 
+
     static void mainFrame() {
         JFrame frame = new JFrame("IHMMain");
         frame.setContentPane(new IHMMain().main_interface);
@@ -41,7 +42,8 @@ public class IHMMain extends javax.swing.JFrame {
     public IHMMain() {
         listScrollPane.setViewportView(lesfilmsList);
         lesfilmsList.setModel(listModel);
-        File directory = new File("JIANG_WANG_KANG_CPOProjet\\src\\film.txt");
+        lesfilmsList.setCellRenderer(new MyListUI());
+        File directory = new File("JIANG_WANG_KANG_CPOProjet/src/film.txt");
         String absoultePath = directory.getAbsolutePath();
         List<String> list_film_in_txt = new ArrayList<String>();
         List<String> list_mode_in_txt = new ArrayList<String>();
@@ -134,9 +136,7 @@ public class IHMMain extends javax.swing.JFrame {
 
             }
         });
-        class CRTest extends DefaultListCellRenderer{
 
-        }
     }
 
 
@@ -170,6 +170,7 @@ public class IHMMain extends javax.swing.JFrame {
         public String toString() {
             return nomdefilm + "\n" + model;
         }
+
     }
 
     private void createUIComponents() {
