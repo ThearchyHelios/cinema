@@ -1,5 +1,3 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -9,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class IHMMain extends javax.swing.JFrame {
     private JPanel main_interface;
@@ -20,15 +19,18 @@ public class IHMMain extends javax.swing.JFrame {
     private JList<lesfilms> lesfilmsList;
     private JTextArea filmInfoTextArea;
     private JLabel nameOfFilmLabel;
+    private JScrollPane listScrollPane;
 
     DefaultListModel<lesfilms> listModel = new DefaultListModel<>();
 
-    static void mainFrame(){
+    static void mainFrame() {
         JFrame frame = new JFrame("IHMMain");
         frame.setContentPane(new IHMMain().main_interface);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
+
     }
 
     public static void main(String[] args) {
@@ -37,8 +39,7 @@ public class IHMMain extends javax.swing.JFrame {
 
 
     public IHMMain() {
-
-
+        listScrollPane.setViewportView(lesfilmsList);
         lesfilmsList.setModel(listModel);
         String filepath = "/Users/yilunjiang/Documents/GitHub/cinema/JIANG_WANG_KANG_CPOProjet/src/film.txt";
         List<String> list_film_in_txt = new ArrayList<String>();
@@ -48,7 +49,7 @@ public class IHMMain extends javax.swing.JFrame {
             FileInputStream fin = new FileInputStream(filepath);
             InputStreamReader reader = new InputStreamReader(fin);
             BufferedReader buffReader = new BufferedReader(reader);
-            StringBuffer buffer = new StringBuffer();
+            StringBuffer stringBuffer = new StringBuffer();
             while ((line = buffReader.readLine()) != null) {
                 System.out.println(line);
                 String[] film_string = line.split(",");
@@ -66,6 +67,8 @@ public class IHMMain extends javax.swing.JFrame {
         for (int j = 0; j < list_film_in_txt.size(); j++) {
             listModel.addElement(new lesfilms(list_film_in_txt.get(j), list_mode_in_txt.get(j)));
         }
+
+
         lesfilmsList.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -78,6 +81,7 @@ public class IHMMain extends javax.swing.JFrame {
         addFilmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 JFrame frameAddFilmToTxt = new JFrame("Add films");
                 frameAddFilmToTxt.setVisible(true);
                 frameAddFilmToTxt.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -94,7 +98,7 @@ public class IHMMain extends javax.swing.JFrame {
                 jPanel1.add(textFieldFilmNameAddFilmToTxt);
 
                 JLabel label2AddFilmToTxt = new JLabel("Type: ");
-                JComboBox comboBoxFilmModeAddFilmToTxt = new JComboBox();
+                JComboBox<String> comboBoxFilmModeAddFilmToTxt = new JComboBox<String>();
                 JButton buttonConfirmAddfilmToText = new JButton("Confirm");
                 comboBoxFilmModeAddFilmToTxt.addItem("DVD");
                 comboBoxFilmModeAddFilmToTxt.addItem("B-ray");
@@ -114,23 +118,21 @@ public class IHMMain extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             FileWriter fw = new FileWriter(filepath, true);
-                            fw.write("\n" + textFieldFilmNameAddFilmToTxt.getText() + ", " + comboBoxFilmModeAddFilmToTxt.getSelectedItem().toString());
+                            fw.write("\n" + textFieldFilmNameAddFilmToTxt.getText() + "," + comboBoxFilmModeAddFilmToTxt.getSelectedItem().toString());
                             fw.close();
+
+                            listModel.addElement(new lesfilms(textFieldFilmNameAddFilmToTxt.getText(), comboBoxFilmModeAddFilmToTxt.getSelectedItem().toString()));
                             frameAddFilmToTxt.setVisible(false);
-                            frameInit();
+
 
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
-                   }
+                    }
                 });
 
             }
         });
-
-
-
-
     }
 
 
