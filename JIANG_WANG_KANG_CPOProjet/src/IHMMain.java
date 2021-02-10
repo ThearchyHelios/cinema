@@ -41,12 +41,13 @@ public class IHMMain extends javax.swing.JFrame {
     public IHMMain() {
         listScrollPane.setViewportView(lesfilmsList);
         lesfilmsList.setModel(listModel);
-        String filepath = "/Users/yilunjiang/Documents/GitHub/cinema/JIANG_WANG_KANG_CPOProjet/src/film.txt";
+        File directory = new File("JIANG_WANG_KANG_CPOProjet\\src\\film.txt");
+        String absoultePath = directory.getAbsolutePath();
         List<String> list_film_in_txt = new ArrayList<String>();
         List<String> list_mode_in_txt = new ArrayList<String>();
         String line = "";
         try {
-            FileInputStream fin = new FileInputStream(filepath);
+            FileInputStream fin = new FileInputStream(absoultePath);
             InputStreamReader reader = new InputStreamReader(fin);
             BufferedReader buffReader = new BufferedReader(reader);
             StringBuffer stringBuffer = new StringBuffer();
@@ -117,7 +118,7 @@ public class IHMMain extends javax.swing.JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         try {
-                            FileWriter fw = new FileWriter(filepath, true);
+                            FileWriter fw = new FileWriter(absoultePath, true);
                             fw.write("\n" + textFieldFilmNameAddFilmToTxt.getText() + "," + comboBoxFilmModeAddFilmToTxt.getSelectedItem().toString());
                             fw.close();
 
@@ -133,6 +134,9 @@ public class IHMMain extends javax.swing.JFrame {
 
             }
         });
+        class CRTest extends DefaultListCellRenderer{
+
+        }
     }
 
 

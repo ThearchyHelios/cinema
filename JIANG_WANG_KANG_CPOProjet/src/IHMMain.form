@@ -88,8 +88,12 @@
           </grid>
         </constraints>
         <properties>
+          <inheritsPopupMenu value="false"/>
+          <layoutOrientation value="0"/>
           <model/>
+          <selectionMode value="0"/>
           <visible value="true"/>
+          <visibleRowCount value="0"/>
         </properties>
       </component>
       <scrollpane id="8c6cd" binding="listScrollPane">
