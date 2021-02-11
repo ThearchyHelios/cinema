@@ -14,6 +14,7 @@ import com.uwetrottmann.tmdb2.services.MoviesService;
 
 
 // Yilun JIANG API Key: 89e5521b3e8381cf6adc8f4c8432e07d
+// Author: JIANG WANG KANG
 
 public class IHMMain extends javax.swing.JFrame {
     private JPanel main_interface;
