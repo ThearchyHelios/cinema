@@ -77,7 +77,7 @@ public class IHMMain extends javax.swing.JFrame {
 
 
         for (int j = 0; j < list_film_in_txt.size(); j++) {
-            listModel.addElement(new lesfilms(list_film_in_txt.get(j), list_mode_in_txt.get(j)));
+            listModel.addElement(new lesfilms(list_film_in_txt.get(j) + " ",list_mode_in_txt.get(j)));
         }
 
 
