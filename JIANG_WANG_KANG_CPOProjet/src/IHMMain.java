@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.uwetrottmann.tmdb2.Tmdb;
+import com.uwetrottmann.tmdb2.services.MoviesService;
+
+
+// Yilun JIANG API Key: 89e5521b3e8381cf6adc8f4c8432e07d
+
 public class IHMMain extends javax.swing.JFrame {
     private JPanel main_interface;
     private JButton searchButton;
@@ -40,6 +46,9 @@ public class IHMMain extends javax.swing.JFrame {
 
 
     public IHMMain() {
+//        Tmdb tmdb = new Tmdb("89e5521b3e8381cf6adc8f4c8432e07d"); /* This is TMDB API Key */
+
+
         listScrollPane.setViewportView(lesfilmsList);
         lesfilmsList.setModel(listModel);
         lesfilmsList.setCellRenderer(new MyListUI());
@@ -77,6 +86,7 @@ public class IHMMain extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 lesfilms film = lesfilmsList.getSelectedValue();
                 filmInfoTextArea.setText("Name: " + film.getNomdefilm() + "\n" + "Type: " + film.getModel());
+                nameOfFilmLabel.setText(film.getNomdefilm());
             }
         });
 
@@ -127,7 +137,6 @@ public class IHMMain extends javax.swing.JFrame {
                             listModel.addElement(new lesfilms(textFieldFilmNameAddFilmToTxt.getText(), comboBoxFilmModeAddFilmToTxt.getSelectedItem().toString()));
                             frameAddFilmToTxt.setVisible(false);
 
-
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }
@@ -137,6 +146,13 @@ public class IHMMain extends javax.swing.JFrame {
             }
         });
 
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String theSearcher1 = textField1.getText().toString();
+            }
+        });
     }
 
 
