@@ -1,2 +1,2 @@
-# cinema
-This is a JAVA projet.
+# Project CPO JAVA cinema
+This is a JAVA project.
